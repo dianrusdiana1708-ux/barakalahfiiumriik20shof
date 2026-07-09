@@ -16,7 +16,6 @@
         }
 
         body {
-            /* Kombinasi gradient pink modern */
             background: linear-gradient(135deg, #ffe4e1 0%, #ffb6c1 100%);
             min-height: 100vh;
             display: flex;
@@ -31,7 +30,7 @@
             background: rgba(255, 255, 255, 0.9);
             width: 90%;
             max-width: 400px;
-            min-height: 460px; /* Diperbesar agar muat foto */
+            min-height: 460px; 
             padding: 40px 30px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(255, 105, 135, 0.2);
@@ -177,6 +176,10 @@
 </head>
 <body>
 
+    <audio id="bgMusic" loop>
+        <source src="sicantiklagu" type="audio/mpeg">
+    </audio>
+
     <div class="card-container">
         
         <div id="screen-1" class="screen active">
@@ -193,11 +196,9 @@
         </div>
 
         <div id="screen-3" class="screen">
-            
             <div class="photo-frame">
                 <img src="FotoMbaShof" alt="Foto Mba Shofwah">
             </div>
-            
             <h2>Doa Spesial Buat Kamu 💖</h2>
             <p>Semoga panjang umur, sehat selalu, dilancarkan rezekinya, dan semua hal baik yang kamu cita-citakan bisa segera terwujud di tahun ini. Bahagia terus ya!</p>
             <button onclick="nextScreen(4)">Lihat Menu Harapan</button>
@@ -223,6 +224,22 @@
     <script>
         // Fungsi untuk berpindah antar halaman/layar
         function nextScreen(screenNumber) {
+            
+            // JALANKAN LAGU SAAT PINDAH KE LAYAR 2
+            if(screenNumber === 2) {
+                var music = document.getElementById("bgMusic");
+                music.play().catch(function(error) {
+                    console.log("Browser mencegah autoplay. Pastikan file lagu valid.");
+                });
+            }
+
+            // MATIKAN LAGU KALAU ULANG DARI AWAL
+            if(screenNumber === 1) {
+                var music = document.getElementById("bgMusic");
+                music.pause();
+                music.currentTime = 0; // Kembalikan lagu ke detik awal
+            }
+
             // Sembunyikan semua layar
             const screens = document.querySelectorAll('.screen');
             screens.forEach(screen => {
@@ -238,7 +255,6 @@
         function showHarapan(kategori) {
             const displayBox = document.getElementById('harapan-text');
             
-            // Memberikan efek fade saat teks berganti
             displayBox.style.opacity = 0;
             
             setTimeout(() => {
