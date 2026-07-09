@@ -207,18 +207,19 @@
 </head>
 <body>
 
-    <audio id="bgMusic" loop controls style="position: absolute; top: 10px; z-index: 100;">
-        <source src="sicantiklagu.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Wadah tersembunyi untuk YouTube -->
+    <div id="youtube-audio" style="display:none;"></div>
 
     <div class="card-container">
         
+        <!-- LAYAR 1: Selamat Datang -->
         <div id="screen-1" class="screen active">
             <h1>Hai, Selamat Datang! 👋</h1>
             <p>Ada pesan rahasia yang spesial banget nih khusus buat kamu hari ini...</p>
             <button onclick="nextScreen(2)">Buka Pesannya</button>
         </div>
 
+        <!-- LAYAR 2: Ucapan Ulang Tahun -->
         <div id="screen-2" class="screen">
             <div class="cake-emoji">🎂</div>
             <h1>Selamat Ulang Tahun yang ke-20! Bu Hajah Shofwahh 🎉</h1>
@@ -226,8 +227,10 @@
             <button onclick="nextScreen(3)">Ada Lagi Nih...</button>
         </div>
 
+        <!-- LAYAR 3: Doa + FOTO -->
         <div id="screen-3" class="screen">
             <div class="photo-frame">
+                <!-- Foto Mba Shofwah -->
                 <img src="FotoMbaShof" alt="Foto Mba Shofwah">
             </div>
             <h2>Doa Spesial Buat Kamu 💖</h2>
@@ -235,6 +238,7 @@
             <button onclick="nextScreen(4)">Lihat Menu Harapan</button>
         </div>
 
+        <!-- LAYAR 4: Menu Harapan Interaktif -->
         <div id="screen-4" class="screen">
             <h2>Pilih Harapanmu ✨</h2>
             <div class="menu-container">
@@ -250,6 +254,7 @@
             <button onclick="nextScreen(5)">Lanjut Tulis Harapan ✍️</button>
         </div>
 
+        <!-- LAYAR 5: Tulis Harapan Sendiri -->
         <div id="screen-5" class="screen">
             <h2>Tulis Harapanmu 🌟</h2>
             <p style="margin-bottom: 10px;">Coba tulis harapan spesialmu untuk diri sendiri di umur 20 tahun ini.</p>
@@ -268,19 +273,18 @@
         // Fungsi untuk berpindah antar halaman/layar
         function nextScreen(screenNumber) {
             
-            // JALANKAN LAGU SAAT PINDAH KE LAYAR 2
+            // JALANKAN LAGU YOUTUBE SAAT PINDAH KE LAYAR 2
             if(screenNumber === 2) {
-                var music = document.getElementById("bgMusic");
-                music.play().catch(function(error) {
-                    console.log("Browser mencegah autoplay. Pastikan file lagu valid.");
-                });
+                // ID YouTube sudah dimasukkan di sini
+                const youtubeID = "KZTYQL0Ys3c"; 
+                
+                document.getElementById('youtube-audio').innerHTML = 
+                    '<iframe width="0" height="0" src="https://www.youtube.com/embed/' + youtubeID + '?autoplay=1&loop=1&playlist=' + youtubeID + '" frameborder="0" allow="autoplay"></iframe>';
             }
 
             // MATIKAN LAGU DAN RESET FORM KALAU ULANG DARI AWAL
             if(screenNumber === 1) {
-                var music = document.getElementById("bgMusic");
-                music.pause();
-                music.currentTime = 0; 
+                document.getElementById('youtube-audio').innerHTML = ''; // Matikan lagu
                 
                 // Reset form isi harapan
                 document.getElementById('userWish').value = '';
@@ -331,7 +335,7 @@
             } else {
                 responseText.innerHTML = "Yeay! Harapanmu udah dicatat dan diaminkan sama semesta! 🌟 Aamiin...";
                 responseText.style.display = "block";
-                document.getElementById('userWish').value = ''; // Kosongkan form setelah berhasil
+                document.getElementById('userWish').value = ''; 
             }
         }
     </script>
