@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy 20th Birthday! 🎉</title>
-    <!-- Menggunakan font modern dan lucu dari Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -32,7 +31,7 @@
             background: rgba(255, 255, 255, 0.9);
             width: 90%;
             max-width: 400px;
-            min-height: 400px;
+            min-height: 460px; /* Diperbesar agar muat foto */
             padding: 40px 30px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(255, 105, 135, 0.2);
@@ -154,20 +153,38 @@
             40% { transform: translateY(-20px); }
             60% { transform: translateY(-10px); }
         }
+
+        /* === BINGKAI FOTO BULAT === */
+        .photo-frame {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
 
     <div class="card-container">
         
-        <!-- LAYAR 1: Selamat Datang -->
         <div id="screen-1" class="screen active">
             <h1>Hai, Selamat Datang! 👋</h1>
             <p>Ada pesan rahasia yang spesial banget nih khusus buat kamu hari ini...</p>
             <button onclick="nextScreen(2)">Buka Pesannya</button>
         </div>
 
-        <!-- LAYAR 2: Ucapan Ulang Tahun -->
         <div id="screen-2" class="screen">
             <div class="cake-emoji">🎂</div>
             <h1>Selamat Ulang Tahun yang ke-20! Bu Hajah Shofwahh 🎉</h1>
@@ -175,14 +192,17 @@
             <button onclick="nextScreen(3)">Ada Lagi Nih...</button>
         </div>
 
-        <!-- LAYAR 3: Doa -->
         <div id="screen-3" class="screen">
+            
+            <div class="photo-frame">
+                <img src="FotoMbaShof" alt="Foto Mba Shofwah">
+            </div>
+            
             <h2>Doa Spesial Buat Kamu 💖</h2>
             <p>Semoga panjang umur, sehat selalu, dilancarkan rezekinya, dan semua hal baik yang kamu cita-citakan bisa segera terwujud di tahun ini. Bahagia terus ya!</p>
             <button onclick="nextScreen(4)">Lihat Menu Harapan</button>
         </div>
 
-        <!-- LAYAR 4: Menu Harapan Interaktif -->
         <div id="screen-4" class="screen">
             <h2>Pilih Harapanmu ✨</h2>
             <div class="menu-container">
