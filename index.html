@@ -36,15 +36,15 @@
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
         .photo-frame { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 15px; display: flex; justify-content: center; align-items: center; }
         .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* TRIK ANTI-BLOKIR HP: Sembunyikan player di luar layar */
-        .hidden-player { position: absolute; width: 1px; height: 1px; top: -9999px; left: -9999px; opacity: 0; pointer-events: none; }
     </style>
 </head>
 <body>
 
-    <!-- Wadah YouTube dengan trik CSS -->
-    <div id="youtube-audio" class="hidden-player"></div>
+    <!-- PEMUTAR MUSIK MP3 BAWAAN (TANPA YOUTUBE, TANPA IKLAN) -->
+    <audio id="bgMusic" loop>
+        <!-- Pastikan nama file di GitHub adalah sicantiklagu.mp3 -->
+        <source src="sicantiklagu.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="card-container">
         
@@ -101,11 +101,9 @@
 
     <script>
         function playMusic() {
-            const youtubeID = "KZTYQL0Ys3c"; 
-            const playerContainer = document.getElementById('youtube-audio');
-            
-            // Trik khusus agar HP mengizinkan suara: allow="autoplay; encrypted-media"
-            playerContainer.innerHTML = '<iframe width="10" height="10" src="https://www.youtube.com/embed/' + youtubeID + '?autoplay=1&loop=1&playlist=' + youtubeID + '" frameborder="0" allow="autoplay; encrypted-media"></iframe>';
+            // Putar file MP3
+            var music = document.getElementById("bgMusic");
+            music.play();
             
             // Ubah tombol jadi "Sedang Diputar"
             const btn = document.getElementById('btn-musik');
@@ -118,7 +116,9 @@
         function nextScreen(screenNumber) {
             // Reset semuanya kalau kembali ke Layar 1
             if(screenNumber === 1) { 
-                document.getElementById('youtube-audio').innerHTML = ''; 
+                var music = document.getElementById("bgMusic");
+                music.pause();
+                music.currentTime = 0;
                 
                 const btn = document.getElementById('btn-musik');
                 btn.innerHTML = "Nyalakan Musik 🎵";
