@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 20th Birthday! 🎉</title>
+    <!-- Menggunakan font modern dan lucu dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === BASE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            /* Kombinasi gradient pink modern */
+            background: linear-gradient(135deg, #ffe4e1 0%, #ffb6c1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #d81b60;
+        }
+
+        /* === MAIN CARD CONTAINER === */
+        .card-container {
+            background: rgba(255, 255, 255, 0.9);
+            width: 90%;
+            max-width: 400px;
+            min-height: 400px;
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 105, 135, 0.2);
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        /* === SCREEN TRANSITIONS === */
+        .screen {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === TYPOGRAPHY === */
+        h1 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #ff4757;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff6b81;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #57606f;
+        }
+
+        /* === BUTTON STYLES === */
+        button {
+            background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.5);
+        }
+
+        /* === MENU HARAPAN STYLES === */
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            background: #fff0f3;
+            padding: 12px;
+            border-radius: 15px;
+            font-weight: 700;
+            color: #ff4757;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: #ffe4e8;
+            border-color: #ffb6c1;
+            transform: scale(1.02);
+        }
+
+        .harapan-display {
+            background: #f1f2f6;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            color: #2f3542;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* Emoji animasi untuk halaman 2 */
+        .cake-emoji {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        
+        <!-- LAYAR 1: Selamat Datang -->
+        <div id="screen-1" class="screen active">
+            <h1>Hai, Selamat Datang! 👋</h1>
+            <p>Ada pesan rahasia yang spesial banget nih khusus buat kamu hari ini...</p>
+            <button onclick="nextScreen(2)">Buka Pesannya</button>
+        </div>
+
+        <!-- LAYAR 2: Ucapan Ulang Tahun -->
+        <div id="screen-2" class="screen">
+            <div class="cake-emoji">🎂</div>
+            <h1>Selamat Ulang Tahun yang ke-20! 🎉</h1>
+            <p>Wah, cieee udah kepala dua sekarang! Makin dewasa, makin kece, dan pastinya makin keren dong!</p>
+            <button onclick="nextScreen(3)">Ada Lagi Nih...</button>
+        </div>
+
+        <!-- LAYAR 3: Doa -->
+        <div id="screen-3" class="screen">
+            <h2>Doa Spesial Buat Kamu 💖</h2>
+            <p>Semoga panjang umur, sehat selalu, dilancarkan rezekinya, dan semua hal baik yang kamu cita-citakan bisa segera terwujud di tahun ini. Bahagia terus ya!</p>
+            <button onclick="nextScreen(4)">Lihat Menu Harapan</button>
+        </div>
+
+        <!-- LAYAR 4: Menu Harapan Interaktif -->
+        <div id="screen-4" class="screen">
+            <h2>Pilih Harapanmu ✨</h2>
+            <div class="menu-container">
+                <div class="menu-item" onclick="showHarapan('pendidikan')">🎓 Karir & Pendidikan</div>
+                <div class="menu-item" onclick="showHarapan('diri')">✨ Glow Up & Diri Sendiri</div>
+                <div class="menu-item" onclick="showHarapan('cinta')">💕 Asmara</div>
+            </div>
+            
+            <div id="harapan-text" class="harapan-display">
+                Klik salah satu menu di atas ya! 👆
+            </div>
+
+            <button onclick="nextScreen(1)" style="background: #ffb6c1; color: #d81b60; box-shadow: none;">Ulangi dari Awal</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Fungsi untuk berpindah antar halaman/layar
+        function nextScreen(screenNumber) {
+            // Sembunyikan semua layar
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            // Tampilkan layar yang dituju
+            const targetScreen = document.getElementById('screen-' + screenNumber);
+            targetScreen.classList.add('active');
+        }
+
+        // Fungsi untuk menampilkan teks pada menu harapan
+        function showHarapan(kategori) {
+            const displayBox = document.getElementById('harapan-text');
+            
+            // Memberikan efek fade saat teks berganti
+            displayBox.style.opacity = 0;
+            
+            setTimeout(() => {
+                if(kategori === 'pendidikan') {
+                    displayBox.innerHTML = "Semoga kuliah/kerjanya lancar, cepet sukses, dan bisa banggain orang tua! Semangat terus kejar impiannya! 🚀";
+                } 
+                else if (kategori === 'diri') {
+                    displayBox.innerHTML = "Semoga makin sabar, makin rajin nabung, dan pastinya makin glow up luar maupun dalam! 💸💅";
+                } 
+                else if (kategori === 'cinta') {
+                    displayBox.innerHTML = "Semoga selalu dikelilingi orang-orang yang sayang tulus sama kamu dan dijauhkan dari red flag! 🥰🚩";
+                }
+                
+                displayBox.style.opacity = 1;
+            }, 200);
+        }
+    </script>
+
+</body>
+</html>
