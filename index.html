@@ -93,6 +93,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+            margin-top: 10px;
         }
 
         button:hover {
@@ -136,8 +137,38 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             transition: all 0.3s ease;
+        }
+
+        /* === TEXTAREA STYLES (Form Isi Harapan) === */
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #ffb6c1;
+            resize: none;
+            font-size: 14px;
+            color: #57606f;
+            margin-bottom: 15px;
+            background: #fff0f3;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ff4757;
+            background: #fff;
+        }
+
+        .success-msg {
+            color: #ff4757;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
         }
 
         /* Emoji animasi untuk halaman 2 */
@@ -216,7 +247,19 @@
                 Klik salah satu menu di atas ya! 👆
             </div>
 
-            <button onclick="nextScreen(1)" style="background: #ffb6c1; color: #d81b60; box-shadow: none;">Ulangi dari Awal</button>
+            <button onclick="nextScreen(5)">Lanjut Tulis Harapan ✍️</button>
+        </div>
+
+        <div id="screen-5" class="screen">
+            <h2>Tulis Harapanmu 🌟</h2>
+            <p style="margin-bottom: 10px;">Coba tulis harapan spesialmu untuk diri sendiri di umur 20 tahun ini.</p>
+            
+            <textarea id="userWish" placeholder="Ketik harapanmu di sini ya..."></textarea>
+            
+            <button onclick="simpanHarapan()">Kirim Ke Semesta ✨</button>
+            <p id="wishResponse" class="success-msg"></p>
+
+            <button onclick="nextScreen(1)" style="background: #ffb6c1; color: #d81b60; box-shadow: none; margin-top: 30px;">Ulangi dari Awal</button>
         </div>
 
     </div>
@@ -233,11 +276,16 @@
                 });
             }
 
-            // MATIKAN LAGU KALAU ULANG DARI AWAL
+            // MATIKAN LAGU DAN RESET FORM KALAU ULANG DARI AWAL
             if(screenNumber === 1) {
                 var music = document.getElementById("bgMusic");
                 music.pause();
-                music.currentTime = 0; // Kembalikan lagu ke detik awal
+                music.currentTime = 0; 
+                
+                // Reset form isi harapan
+                document.getElementById('userWish').value = '';
+                document.getElementById('wishResponse').style.display = 'none';
+                document.getElementById('harapan-text').innerHTML = 'Klik salah satu menu di atas ya! 👆';
             }
 
             // Sembunyikan semua layar
@@ -270,6 +318,21 @@
                 
                 displayBox.style.opacity = 1;
             }, 200);
+        }
+
+        // Fungsi untuk mengelola tombol kirim harapan
+        function simpanHarapan() {
+            const wishInput = document.getElementById('userWish').value;
+            const responseText = document.getElementById('wishResponse');
+            
+            if(wishInput.trim() === '') {
+                responseText.innerHTML = "Eits, harapannya jangan dikosongin dong! 🥺";
+                responseText.style.display = "block";
+            } else {
+                responseText.innerHTML = "Yeay! Harapanmu udah dicatat dan diaminkan sama semesta! 🌟 Aamiin...";
+                responseText.style.display = "block";
+                document.getElementById('userWish').value = ''; // Kosongkan form setelah berhasil
+            }
         }
     </script>
 
